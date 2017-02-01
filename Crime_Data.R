@@ -1,0 +1,12 @@
+BPD_Part_1_Victim_Based_Crime_Data <- read.csv("BPD_Part_1_Victim_Based_Crime_Data.csv",na.strings = c("NULL","PrivacySuppressed",""))
+> library(tibble)
+> CD <- tbl_df(BPD_Part_1_Victim_Based_Crime_Data)
+> dim(CD)
+library(dplyr)
+summarise(CD,POSTm=mean(Post,na.rm=T),POSTsd=sd(Post,na.rm=T))
+by_CrimeCode <- group_by(CD,CrimeCode)
+summarise(by_CrimeCode,POSTm=mean(Post,na.rm=T),POSTsd=sd(Post,na.rm=T))
+Group <- group_by(CD,CrimeCode,District)
+summarise(Group,count=n())
+cross.tab <- table(CD$CrimeCode,CD$Weapon)
+cross.tab
